@@ -89,6 +89,23 @@ public class AddressBookService {
         }
         System.out.println(hashMapOfAddressBooks.get(name));
     }
+    
+    
+    
+    public static void displayByOrder() {
+        System.out.println(" Please enter the name of the address book: ");
+        String name = sc.next();
+        if(hashMapOfAddressBooks.get(name).isEmpty())
+        {
+            System.out.println("The Address Book is empty.");
+            return;
+        }
+        hashMapOfAddressBooks.get(name).stream().map(n->n.getFirstName()).sorted().forEach(n-> System.out.println(n));
+    }
+    
+    
+    
+    
     public static void editContact() {
         System.out.println("Enter the Address book you want to edit.");
         String addressBookEdit = sc.next();

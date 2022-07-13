@@ -48,6 +48,9 @@ public class AddressBook {
                     AddressBookService.findSameCityContacts(city);
                     break;
                 case "8":
+                    AddressBookService.displayByOrder();
+                    break;
+                case "9":
                     System.out.println("Thank You!");
                     return;
                 default:
