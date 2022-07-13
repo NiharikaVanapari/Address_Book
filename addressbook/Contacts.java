@@ -16,6 +16,10 @@ public class Contacts {
 	    public String getLastName() {
 	        return lastName;
 	    }
+	    public int getZip()
+	    {
+	    	return zip;
+	    }
 
 	    private String city;
 	    private String state;

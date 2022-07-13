@@ -48,7 +48,17 @@ public class AddressBook {
                     AddressBookService.findSameCityContacts(city);
                     break;
                 case "8":
-                    AddressBookService.displayByOrder();
+                    int option2;
+                    System.out.println("\t\nEnter 1: To sort by city:\nEnter 2: To sort by state:\nEnter 3: To sort by zip:");
+                    option2 = sc.nextInt();
+                    switch (option2){
+                        case 1 : AddressBookService.sortByCity();
+                            break;
+                        case 2 : AddressBookService.sortByCity();
+                            break;
+                        case 3:AddressBookService.sortByZip();
+                            break;
+                    }
                     break;
                 case "9":
                     System.out.println("Thank You!");
