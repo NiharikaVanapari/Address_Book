@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AddressBookService {
-	 public static Scanner sc = new Scanner(System.in);
+	  public static Scanner sc = new Scanner(System.in);
 	    public static ArrayList<Contacts> arrayOfContacts = new ArrayList<Contacts>();
 	    public static void addContact()
 	    {
@@ -61,36 +61,38 @@ public class AddressBookService {
 	            System.out.println("Found the contact\nPlease edit the details: ");
 	            addContact();
 	        }
-	        private static int deleteContact(String delName)
-	        {
-	            for (Contacts contact : arrayOfContacts) {
-	                if (delName.compareToIgnoreCase(contact.getFirstName()) == 0) {
-	                    return arrayOfContacts.indexOf(contact);
-	                }
+	    }
+
+	    private static int deleteContact(String delName)
+	    {
+	        for (Contacts contact : arrayOfContacts) {
+	            if (delName.compareToIgnoreCase(contact.getFirstName()) == 0) {
+	                return arrayOfContacts.indexOf(contact);
 	            }
-	            return -1;
 	        }
-	        public static void deleteContact()
+	        return -1;
+	    }
+	    public static void deleteContact()
+	    {
+	        System.out.println("Enter the name you want to delete.");
+	        String delName = sc.next();
+	        int ans = deleteContact(delName);
+	        if(ans == -1)
 	        {
-	            System.out.println("Enter the name you want to delete.");
-	            String delName = sc.next();
-	            int ans = deleteContact(delName);
-	            if(ans == -1)
+	            System.out.println("Contact with name "+delName+" not found");
+	        }
+	        else {
+	            System.out.println("Details of name : "+delName+" have been deleted");
+	            arrayOfContacts.clear();
+	            if(arrayOfContacts.isEmpty())
 	            {
-	                System.out.println("Contact with name "+delName+" not found");
+	                System.out.println("No new contacts");
 	            }
 	            else {
-	                System.out.println("Details of name : "+delName+" have been deleted");
-	                arrayOfContacts.clear();
-	                if(arrayOfContacts.isEmpty())
-	                {
-	                    System.out.println("No new contacts");
-	                }
-	                else {
-	                    for (Contacts c:arrayOfContacts) {
-	                        System.out.println(c);
-	                    }
+	                for (Contacts c:arrayOfContacts) {
+	                    System.out.println(c);
 	                }
 	            }
+	        }
 	    }
 }
