@@ -1,8 +1,6 @@
 package addressbook;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class AddressBookService {
@@ -10,8 +8,6 @@ public class AddressBookService {
     public static ArrayList<Contacts> arrayOfContacts;
     public static HashMap<String, ArrayList<Contacts>> hashMapOfAddressBooks = new HashMap<>();
 
-    public static HashMap<String,String> dictionaryForState = new HashMap<String,String>();
-    public static HashMap<String,String> dictionaryForCity = new HashMap<String,String>();
     public static ArrayList<Contacts> findAddressBook(String name) {
         for (Map.Entry<String, ArrayList<Contacts>> iterator : hashMapOfAddressBooks.entrySet()) {
             if (iterator.getKey().equals(name)) {
@@ -49,34 +45,29 @@ public class AddressBookService {
         String first_name = sc.next();
         System.out.println("Please enter your last name :");
         String last_name = sc.next();
-        if(AddressBookService.checkDuplicate(bookName,first_name,last_name)) {
-            sc.nextLine();
-            System.out.println("Please enter your address :");
-            String address = sc.nextLine();
-            System.out.println("Please enter your city :");
-            String city = sc.next();
-            System.out.println("Please enter your state :");
-            String state = sc.next();
-            System.out.println("Please enter your zip code :");
-            int zip = sc.nextInt();
-            System.out.println("Please enter your phone number :");
-            long phone = sc.nextLong();
-            System.out.println("Please enter your email id :");
-            String email_id = sc.next();
-            Contacts c = new Contacts(first_name, last_name, address, city, state, zip, phone, email_id);
-            dictionaryForState.put(first_name+" "+last_name,state);
-            dictionaryForCity.put(first_name+" "+last_name,city);
-            if (findAddressBook(bookName) != null) {
-                hashMapOfAddressBooks.get(bookName).add(c);
-                return;
-            }
-            arrayOfContacts = new ArrayList<Contacts>();
-            arrayOfContacts.add(c);
-            hashMapOfAddressBooks.put(bookName, arrayOfContacts);
+        sc.nextLine();
+        System.out.println("Please enter your address :");
+        String address = sc.nextLine();
+        System.out.println("Please enter your city :");
+        String city = sc.next();
+        System.out.println("Please enter your state :");
+        String state = sc.next();
+        System.out.println("Please enter your zip code :");
+        int zip = sc.nextInt();
+        System.out.println("Please enter your phone number :");
+        long phone = sc.nextLong();
+        System.out.println("Please enter your email id :");
+        String email_id = sc.next();
+        Contacts c = new Contacts(first_name, last_name, address, city, state, zip, phone, email_id);
+        if(findAddressBook(bookName) != null)
+        {
+            hashMapOfAddressBooks.get(bookName).add(c);
+            return;
         }
-        else{
-            System.out.println("The contact with name: "+first_name+" already exists.\n"+hashMapOfAddressBooks.get(bookName));
-        }
+        arrayOfContacts =  new ArrayList<Contacts>();
+        arrayOfContacts.add(c);
+        hashMapOfAddressBooks.put(bookName,arrayOfContacts);
+
     }
 
     public static void display() {
@@ -135,45 +126,5 @@ public class AddressBookService {
         }
         System.out.println("Deleted the Contact");
         arrayList.remove(index);
-    }
-    //Overriding the equals() method.
-    public static boolean checkDuplicate(String book,String name,String last_name)
-    {
-        if(hashMapOfAddressBooks.get(book) == null)
-        {
-            return true;
-        }
-        ArrayList<Contacts> arrayList = hashMapOfAddressBooks.get(book);
-
-        for(Contacts c : arrayList)
-        {
-            if(name.equals(c.getFirstName()) && last_name.equals(c.getLastName()))
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-    // Searching using State
-    public static void findSameStateContacts(String state)
-    {
-        for(String s : dictionaryForState.keySet())
-        {
-            if(dictionaryForState.get(s).equals(state))
-            {
-                System.out.println(s);
-            }
-        }
-    }
-    //Searching using city
-    public static void findSameCityContacts(String city)
-    {
-        for(String s : dictionaryForCity.keySet())
-        {
-            if(dictionaryForCity.get(s).equals(city))
-            {
-                System.out.println(s);
-            }
-        }
     }
 }
